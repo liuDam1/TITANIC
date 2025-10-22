@@ -2,7 +2,6 @@ package es.etg.psp.titanic;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.*;
 
 public class ServicioEmergencias {
 
@@ -13,79 +12,63 @@ public class ServicioEmergencias {
     public static final String MSG_GENERANDO_INFORMES = "\nGenerando informes finales...";
     public static final String RUTA_CLASES = "target/classes";
     public static final int NUMERO_BOTES = 20;
-    public static final int TAMANO_POOL_HILOS = 10;
     public static final String FORMATO_ID_BOTE = "B%02d";
 
-    private final List<Persona> resultados = Collections.synchronizedList(new ArrayList<>());
-    private int botesCompletados = 0;
-    private final Object lock = new Object();
+    private final List<Persona> resultados = new ArrayList<>();
 
     public void iniciarSimulacion() {
         System.out.println(MSG_INICIANDO_SIMULACION);
-        ExecutorService executor = Executors.newFixedThreadPool(TAMANO_POOL_HILOS); // Usar un pool de hilos
 
         for (int i = 0; i < NUMERO_BOTES; i++) {
             final String id = String.format(FORMATO_ID_BOTE, i);
             
-            // Enviar cada bote a ejecutarse en un hilo separado
-            executor.submit(() -> {
+            try {
                 // Comando para lanzar otro proceso Java
                 String[] comando = {
                     "java",
                     "-cp",
-                    RUTA_CLASES, // carpeta donde Maven coloca los .class
+                    RUTA_CLASES,
                     "es.etg.psp.titanic.Bote",
                     id
                 };
 
-                try {
-                    Process process = Runtime.getRuntime().exec(comando);
-                    StringBuilder output = new StringBuilder();
+                Process process = Runtime.getRuntime().exec(comando);
+                
+                StringBuilder output = new StringBuilder();
 
-                    // Capturar salida estándar
-                    BufferedReader reader = new BufferedReader(
-                            new InputStreamReader(process.getInputStream()));
+                // Capturar salida estándar
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(process.getInputStream()));
 
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        output.append(line).append("\n");
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line).append("\n");
+                }
+
+                int exitVal = process.waitFor();
+
+                if (exitVal == 0) {
+                    String salida = output.toString().trim();
+                    if (!salida.isEmpty()) {
+                        Persona stats = parsearSalida(salida);
+                        
+                        // Mostrar información del bote inmediatamente
+                        System.out.printf(MSG_BOTE_COMPLETADO + "\n", stats.getIdentificadorBote(), stats.getTotalPersonas());
+                        
+                        // Añadir a resultados
+                        resultados.add(stats);
                     }
-
-                    int exitVal = process.waitFor();
-
-                    if (exitVal == 0) {
-                        String salida = output.toString().trim();
-                        if (!salida.isEmpty()) {
-                            Persona stats = parsearSalida(salida);
-                            
-                            // Mostrar información del bote inmediatamente
-                            System.out.printf(MSG_BOTE_COMPLETADO + "\n", stats.getIdentificadorBote(), stats.getTotalPersonas());
-                            
-                            // Añadir a resultados de forma sincronizada
-                            synchronized (resultados) {
-                                resultados.add(stats);
-                            }
-                            
-                            // Verificar si todos los botes han completado
-                            synchronized (lock) {
-                                botesCompletados++;
-                                if (botesCompletados == NUMERO_BOTES) {
-                                    // Todos los botes han completado, generar informes
-                                    generarInformes();
-                                }
-                            }
-                        }
-                    } else {
-                        System.err.println(MSG_ERROR + " en bote " + id);
-                    }
-
-                } catch (IOException | InterruptedException e) {
+                } else {
                     System.err.println(MSG_ERROR + " en bote " + id);
                 }
-            });
+
+            } catch (IOException | InterruptedException e) {
+                System.err.println(MSG_ERROR + " en bote " + id);
+            }
         }
         
-        executor.shutdown(); // Apagar el executor después de enviar todas las tareas
+        // Cuando todos los procesos han terminado, generar informes
+        generarInformes();
     }
 
     private Persona parsearSalida(String linea) {
@@ -108,9 +91,7 @@ public class ServicioEmergencias {
         final String TIPO_INFORME_MARKDOWN = "markdown";
         
         // Ordenar los resultados por ID del bote para un informe más legible
-        synchronized (resultados) {
-            resultados.sort(Comparator.comparingInt(s -> Integer.parseInt(s.getIdentificadorBote().substring(1))));
-        }
+        resultados.sort(Comparator.comparingInt(s -> Integer.parseInt(s.getIdentificadorBote().substring(1))));
         
         Informe consola = FactoriaInforme.crearInforme(TIPO_INFORME_CONSOLA);
         Informe markdown = FactoriaInforme.crearInforme(TIPO_INFORME_MARKDOWN);
