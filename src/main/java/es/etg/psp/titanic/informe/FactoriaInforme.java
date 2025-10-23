@@ -1,6 +1,5 @@
 package es.etg.psp.titanic.informe;
 
-import es.etg.psp.titanic.informe.TipoInforme;
 
 public class FactoriaInforme {
     // Constantes para mensajes de error
