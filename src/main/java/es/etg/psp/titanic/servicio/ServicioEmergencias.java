@@ -1,7 +1,12 @@
-package es.etg.psp.titanic;
+package es.etg.psp.titanic.servicio;
 
 import java.io.*;
 import java.util.*;
+
+import es.etg.psp.titanic.barcos.Persona;
+import es.etg.psp.titanic.informe.FactoriaInforme;
+import es.etg.psp.titanic.informe.Informe;
+import es.etg.psp.titanic.informe.TipoInforme;
 
 public class ServicioEmergencias {
 
@@ -13,6 +18,19 @@ public class ServicioEmergencias {
     public static final String RUTA_CLASES = "target/classes";
     public static final int NUMERO_BOTES = 20;
     public static final String FORMATO_ID_BOTE = "B%02d";
+    
+    // Constantes para el comando
+    public static final String COMANDO_JAVA = "java";
+    public static final String PARAMETRO_CLASSPATH = "-cp";
+    public static final String CLASE_BOTE = "es.etg.psp.titanic.barcos.Bote";
+    
+    // Constantes para parsing
+    public static final String SEPARADOR_CSV = ",";
+    public static final String SALTO_LINEA = "\n";
+    public static final String ESPACIO_BOTE = " en bote ";
+    
+    // Se usa el enum TipoInforme en lugar de constantes de cadena
+    public static final String FORMATO_MENSAJE = "%s\n";
 
     private final List<Persona> resultados = new ArrayList<>();
 
@@ -23,12 +41,11 @@ public class ServicioEmergencias {
             final String id = String.format(FORMATO_ID_BOTE, i);
             
             try {
-                // Comando para lanzar otro proceso Java
                 String[] comando = {
-                    "java",
-                    "-cp",
+                    COMANDO_JAVA,
+                    PARAMETRO_CLASSPATH,
                     RUTA_CLASES,
-                    "es.etg.psp.titanic.Bote",
+                    CLASE_BOTE,
                     id
                 };
 
@@ -36,13 +53,12 @@ public class ServicioEmergencias {
                 
                 StringBuilder output = new StringBuilder();
 
-                // Capturar salida estándar
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(process.getInputStream()));
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    output.append(line).append("\n");
+                    output.append(line).append(SALTO_LINEA);
                 }
 
                 int exitVal = process.waitFor();
@@ -52,28 +68,25 @@ public class ServicioEmergencias {
                     if (!salida.isEmpty()) {
                         Persona stats = parsearSalida(salida);
                         
-                        // Mostrar información del bote inmediatamente
-                        System.out.printf(MSG_BOTE_COMPLETADO + "\n", stats.getIdentificadorBote(), stats.getTotalPersonas());
+                        System.out.printf(FORMATO_MENSAJE, 
+                            String.format(MSG_BOTE_COMPLETADO, stats.getIdentificadorBote(), stats.getTotalPersonas()));
                         
-                        // Añadir a resultados
                         resultados.add(stats);
                     }
                 } else {
-                    System.err.println(MSG_ERROR + " en bote " + id);
+                    System.err.println(MSG_ERROR + ESPACIO_BOTE + id);
                 }
 
             } catch (IOException | InterruptedException e) {
-                System.err.println(MSG_ERROR + " en bote " + id);
+                System.err.println(MSG_ERROR + ESPACIO_BOTE + id);
             }
         }
         
-        // Cuando todos los procesos han terminado, generar informes
         generarInformes();
     }
 
     private Persona parsearSalida(String linea) {
-        // formato: id,total,mujeres,varones,niños
-        String[] partes = linea.split(",");
+        String[] partes = linea.split(SEPARADOR_CSV);
         return new Persona(
                 partes[0],
                 Integer.parseInt(partes[1]),
@@ -86,15 +99,10 @@ public class ServicioEmergencias {
     private void generarInformes() {
         System.out.println(MSG_GENERANDO_INFORMES);
         
-        // Constantes para tipos de informes
-        final String TIPO_INFORME_CONSOLA = "consola";
-        final String TIPO_INFORME_MARKDOWN = "markdown";
-        
-        // Ordenar los resultados por ID del bote para un informe más legible
         resultados.sort(Comparator.comparingInt(s -> Integer.parseInt(s.getIdentificadorBote().substring(1))));
         
-        Informe consola = FactoriaInforme.crearInforme(TIPO_INFORME_CONSOLA);
-        Informe markdown = FactoriaInforme.crearInforme(TIPO_INFORME_MARKDOWN);
+        Informe consola = FactoriaInforme.crearInforme(TipoInforme.CONSOLA);
+        Informe markdown = FactoriaInforme.crearInforme(TipoInforme.MARKDOWN);
 
         consola.generarInforme(resultados);
         markdown.generarInforme(resultados);

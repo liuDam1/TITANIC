@@ -1,10 +1,12 @@
-package es.etg.psp.titanic;
+package es.etg.psp.titanic.informe;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import es.etg.psp.titanic.barcos.Persona;
 
 public class InformeMarkdown implements Informe {
     // Constantes para el informe
@@ -59,4 +61,3 @@ public class InformeMarkdown implements Informe {
         }
     }
 }
-
