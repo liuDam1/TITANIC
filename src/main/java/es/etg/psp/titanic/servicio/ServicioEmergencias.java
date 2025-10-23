@@ -3,10 +3,10 @@ package es.etg.psp.titanic.servicio;
 import java.io.*;
 import java.util.*;
 
-import es.etg.psp.titanic.barcos.Persona;
 import es.etg.psp.titanic.informe.FactoriaInforme;
 import es.etg.psp.titanic.informe.Informe;
 import es.etg.psp.titanic.informe.TipoInforme;
+import es.etg.psp.titanic.model.Persona;
 
 public class ServicioEmergencias {
 

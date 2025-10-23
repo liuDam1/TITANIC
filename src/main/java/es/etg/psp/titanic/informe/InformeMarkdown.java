@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import es.etg.psp.titanic.barcos.Persona;
+import es.etg.psp.titanic.model.Persona;
 
 public class InformeMarkdown implements Informe {
     // Constantes para el informe

@@ -1,4 +1,4 @@
-package es.etg.psp.titanic.barcos;
+package es.etg.psp.titanic.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
