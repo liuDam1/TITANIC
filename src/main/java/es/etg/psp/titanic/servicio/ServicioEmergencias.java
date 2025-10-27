@@ -9,8 +9,6 @@ import es.etg.psp.titanic.informe.TipoInforme;
 import es.etg.psp.titanic.model.Persona;
 
 public class ServicioEmergencias {
-
-    // Constantes para mensajes y valores
     public static final String MSG_ERROR = "Se ha producido un error al ejecutar el comando";
     public static final String MSG_BOTE_COMPLETADO = "Bote %s completado con %d personas a bordo";
     public static final String MSG_INICIANDO_SIMULACION = "Iniciando simulación de rescate...\n";
@@ -18,20 +16,13 @@ public class ServicioEmergencias {
     public static final String RUTA_CLASES = "target/classes";
     public static final int NUMERO_BOTES = 20;
     public static final String FORMATO_ID_BOTE = "B%02d";
-    
-    // Constantes para el comando
     public static final String COMANDO_JAVA = "java";
     public static final String PARAMETRO_CLASSPATH = "-cp";
     public static final String CLASE_BOTE = "es.etg.psp.titanic.barcos.Bote";
-    
-    // Constantes para parsing
     public static final String SEPARADOR_CSV = ",";
     public static final String SALTO_LINEA = "\n";
     public static final String ESPACIO_BOTE = " en bote ";
-    
-    // Se usa el enum TipoInforme en lugar de constantes de cadena
     public static final String FORMATO_MENSAJE = "%s\n";
-
     private final List<Persona> resultados = new ArrayList<>();
 
     public void iniciarSimulacion() {

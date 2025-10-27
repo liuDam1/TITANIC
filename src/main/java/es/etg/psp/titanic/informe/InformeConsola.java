@@ -5,7 +5,6 @@ import java.util.List;
 import es.etg.psp.titanic.model.Persona;
 
 public class InformeConsola implements Informe {
-    // Constantes para el informe en consola
     private static final String TITULO_INFORME = "===== INFORME EN CONSOLA =====";
     private static final String FORMATO_LINEA = "Total salvados en %s: %d%n";
     private static final String SEPARADOR = "==============================";
