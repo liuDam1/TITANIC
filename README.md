@@ -3,7 +3,6 @@
 ## Integrantes del Proyecto
 - Integrante 1: Nombre y Apellidos
 - Integrante 2: Nombre y Apellidos
-- Integrante 3: Nombre y Apellidos
 
 ## Análisis del Problema
 
@@ -257,14 +256,6 @@ Donde:
 
 ## Conclusiones Individuales
 
-### Integrante 1
-La implementación de este proyecto me permitió aplicar conceptos avanzados de programación concurrente y el uso de procesos en Java. Aprendí mucho sobre la comunicación entre procesos y la gestión de recursos en entornos multihilo. El patrón Factory resultó ser especialmente útil para mantener la modularidad del código y facilitar futuras extensiones.
-
-### Integrante 2
-Trabajar con procesos independientes fue un reto interesante que me ayudó a comprender mejor los conceptos de concurrencia y sincronización. La generación de datos aleatorios y la implementación del protocolo de comunicación fueron aspectos clave que requirieron un diseño cuidadoso. También adquirí experiencia valiosa en la generación de informes en diferentes formatos.
-
-### Integrante 3
-Este proyecto destacó la importancia de la planificación arquitectónica desde las etapas iniciales. La separación de responsabilidades entre los componentes (ServicioEmergencias, Bote, Persona) permitió un desarrollo más organizado y mantenible. La implementación de la comunicación basada en salida estándar entre procesos fue una solución elegante y efectiva para el problema planteado.
 
 ---
 
