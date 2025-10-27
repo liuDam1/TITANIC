@@ -8,7 +8,7 @@ public class Bote {
     private static final int MAX_DEMORA = 6;
     private static final int MIN_PERSONAS = 1;
     private static final int MAX_PERSONAS = 100;
-    private static final String FORMATO_SALIDA = "%s,%d,%d,%d,%d";
+    private static final String FORMATO_SALIDA = "%s;%d;%d;%d;%d";
     private static final int CODIGO_EXITO = 0;
     private static final int CODIGO_ERROR = 1;
     private static final int MILISEGUNDOS_POR_SEGUNDO = 1000;
