@@ -30,18 +30,18 @@ public class ServicioEmergencias {
 
         for (int i = 0; i < NUMERO_BOTES; i++) {
             final String id = String.format(FORMATO_ID_BOTE, i);
-            
+
             try {
                 String[] comando = {
-                    COMANDO_JAVA,
-                    PARAMETRO_CLASSPATH,
-                    RUTA_CLASES,
-                    CLASE_BOTE,
-                    id
+                        COMANDO_JAVA,
+                        PARAMETRO_CLASSPATH,
+                        RUTA_CLASES,
+                        CLASE_BOTE,
+                        id
                 };
 
                 Process process = Runtime.getRuntime().exec(comando);
-                
+
                 StringBuilder output = new StringBuilder();
 
                 BufferedReader reader = new BufferedReader(
@@ -58,10 +58,11 @@ public class ServicioEmergencias {
                     String salida = output.toString().trim();
                     if (!salida.isEmpty()) {
                         Persona stats = parsearSalida(salida);
-                        
-                        System.out.printf(FORMATO_MENSAJE, 
-                            String.format(MSG_BOTE_COMPLETADO, stats.getIdentificadorBote(), stats.getTotalPersonas()));
-                        
+
+                        System.out.printf(FORMATO_MENSAJE,
+                                String.format(MSG_BOTE_COMPLETADO, stats.getIdentificadorBote(),
+                                        stats.getTotalPersonas()));
+
                         resultados.add(stats);
                     }
                 } else {
@@ -72,7 +73,7 @@ public class ServicioEmergencias {
                 System.err.println(MSG_ERROR + ESPACIO_BOTE + id);
             }
         }
-        
+
         generarInformes();
     }
 
@@ -83,15 +84,14 @@ public class ServicioEmergencias {
                 Integer.parseInt(partes[1]),
                 Integer.parseInt(partes[2]),
                 Integer.parseInt(partes[3]),
-                Integer.parseInt(partes[4])
-        );
+                Integer.parseInt(partes[4]));
     }
 
     private void generarInformes() {
         System.out.println(MSG_GENERANDO_INFORMES);
-        
+
         resultados.sort(Comparator.comparingInt(s -> Integer.parseInt(s.getIdentificadorBote().substring(1))));
-        
+
         Informe consola = FactoriaInforme.crearInforme(TipoInforme.CONSOLA);
         Informe markdown = FactoriaInforme.crearInforme(TipoInforme.MARKDOWN);
 

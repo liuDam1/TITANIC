@@ -9,7 +9,6 @@ import java.util.List;
 import es.etg.psp.titanic.model.Persona;
 
 public class InformeMarkdown implements Informe {
-    // Constantes para el informe
     private static final String TITULO_INFORME = "# SERVICIO DE EMERGENCIAS\n\n";
     private static final String FORMATO_FECHA = "dd/MM/yyyy 'a las' HH:mm:ss";
     private static final String TEXTO_FECHA = "Ejecucion realizada el dia ";
