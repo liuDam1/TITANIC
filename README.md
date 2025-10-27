@@ -1,14 +1,37 @@
 # Rescate Titanic en 1912
 
+## Índice
+- [Rescate Titanic en 1912](#rescate-titanic-en-1912)
+    - [Indice](#índice)
+    - [Integrantes del Proyecto](#integrantes-del-proyecto)
+    - [Análisis del Problema](#análisis-del-problema)
+        - [Requisitos Funcionales](#requisitos-funcionales)
+        - [Requisitos No Funcionales](#requisitos-no-funcionales)
+    - [Diseño de la Solución](#diseño-de-la-solución)
+        - [Paradigma de Desarrollo](#paradigma-de-desarrollo)
+        - [Diagramas de Clases](#diagramas-de-clases)
+    - [Arquitectura](#arquitectura)
+        - [Diagrama de Flujo](#diagrama-de-flujo)
+    - [Componentes](#componentes)
+    - [Protocolo de Comunicación](#protocolo-de-comunicación)
+        - [Formato de Mensajes](#formato-de-mensajes)
+    - [Plan de Pruebas](#plan-de-pruebas)
+        - [Pruebas Unitarias](#pruebas-unitarias)
+        - [Pruebas de Integración](#pruebas-de-integración)
+        - [Pruebas de Funcionamiento](#pruebas-de-funcionamiento)
+    - [Elementos Destacables del Desarrollo](#elementos-destacables-del-desarrollo)
+    - [Problemas Encontrados](#problemas-encontrados)
+    - [Conclusiones Individuales](#conclusiones-individuales)
+
 ## Integrantes del Proyecto
-- Integrante 1: Nombre y Apellidos
-- Integrante 2: Nombre y Apellidos
+- Integrante 1: 
+- Integrante 2: 
 
 ## Análisis del Problema
 
 El proyecto consiste en simular la gestión de los 20 botes salvavidas del RMS Titanic durante su hundimiento en abril de 1912. El objetivo es implementar un sistema que simule el proceso de rescate desde el lanzamiento de los botes hasta la recopilación y generación de informes finales.
 
-### Requisitos Funcionales:
+### Requisitos Funcionales
 - Simular 20 botes salvavidas con identificadores del B00 al B19
 - Generar un número aleatorio de personas por bote (entre 1 y 100)
 - Simular un tiempo de espera aleatorio de 2 a 6 segundos por bote para contar a los pasajeros
@@ -16,7 +39,7 @@ El proyecto consiste en simular la gestión de los 20 botes salvavidas del RMS T
 - Recopilar la información de todos los botes en un Servicio de Emergencias central
 - Generar un informe en formato Markdown con los resultados del rescate
 
-### Requisitos No Funcionales:
+### Requisitos No Funcionales
 - Uso de procesos independientes para simular la autonomía de cada bote
 - Generación de datos aleatorios realistas para el número de personas por categoría
 - Manejo adecuado de tiempos de espera y sincronización entre procesos

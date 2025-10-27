@@ -13,6 +13,10 @@ public class FactoriaInforme {
                 return new InformeMarkdown();
             case CONSOLA:
                 return new InformeConsola();
+            case HTML:
+                return new InformeHTML();
+            case XML:
+                return new InformeXML();
             default:
                 throw new IllegalArgumentException(ERROR_TIPO_INFORME + tipo);
         }
