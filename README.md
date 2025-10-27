@@ -4,6 +4,7 @@
 - [Rescate Titanic en 1912](#rescate-titanic-en-1912)
     - [Indice](#índice)
     - [Integrantes del Proyecto](#integrantes-del-proyecto)
+    - [Manual de Usuario](#manual-de-usuario)
     - [Análisis del Problema](#análisis-del-problema)
         - [Requisitos Funcionales](#requisitos-funcionales)
         - [Requisitos No Funcionales](#requisitos-no-funcionales)
@@ -26,6 +27,10 @@
 ## Integrantes del Proyecto
 - Integrante 1: 
 - Integrante 2: 
+
+## Manual de Usuario
+- Para ejecutar: **mvn exec:java**
+- Para ejecutar pruebas: **mvn test**
 
 ## Análisis del Problema
 
