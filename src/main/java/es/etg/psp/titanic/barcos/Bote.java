@@ -3,7 +3,6 @@ package es.etg.psp.titanic.barcos;
 import java.util.Random;
 
 public class Bote {
-    // Constantes
     private static final String ERROR_MENSAJE = "Se requiere el ID del bote";
     private static final int MIN_DEMORA = 2;
     private static final int MAX_DEMORA = 6;
@@ -22,7 +21,7 @@ public class Bote {
 
         try {
             Random generador = new Random();
-            Thread.sleep(calcularTiempoDemora(generador));
+            Thread.sleep(calcularTiempo(generador));
             generarSalidaRescate(args[0], generador);
             System.exit(CODIGO_EXITO);
         } catch (InterruptedException e) {
@@ -30,7 +29,7 @@ public class Bote {
         }
     }
 
-    private static int calcularTiempoDemora(Random generador) {
+    private static int calcularTiempo(Random generador) {
         return (MIN_DEMORA + generador.nextInt(MAX_DEMORA - MIN_DEMORA + 1)) * MILISEGUNDOS_POR_SEGUNDO;
     }
 
