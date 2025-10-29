@@ -11,7 +11,7 @@ public class ServicioEmergenciasTest {
     @Test
     public void testParsearSalida() {
         ServicioEmergencias servicio = new ServicioEmergencias();
-        String salida = "B01,100,30,50,20";
+        String salida = "B01;100;30;50;20";
 
         try {
             java.lang.reflect.Method parsearSalidaMethod = ServicioEmergencias.class.getDeclaredMethod("parsearSalida",

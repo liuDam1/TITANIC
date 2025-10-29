@@ -32,7 +32,7 @@ public class BoteTest {
             method.setAccessible(true);
             String output = (String) method.invoke(bote);
 
-            String[] partes = output.split(",");
+            String[] partes = output.split(";");
             assertEquals(5, partes.length);
             assertEquals("B01", partes[0]);
 
@@ -96,7 +96,7 @@ public class BoteTest {
             bote.ejecutarRescate();
 
             String output = outputStream.toString().trim();
-            String[] partes = output.split(",");
+            String[] partes = output.split(";");
             assertEquals("B01", partes[0]);
 
         } finally {
