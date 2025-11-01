@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class BoteTest {
 
+    // Prueba el método generarDatosRescate del bote, verificando la salida de los datos de rescate.
     @Test
     public void testGenerarDatosRescate() {
         Random mockRandom = mock(Random.class);
@@ -53,6 +54,7 @@ public class BoteTest {
         }
     }
 
+    // Prueba el método calcularTiempoDemora del bote, verificando el tiempo de demora aleatorio.
     @Test
     public void testCalcularTiempoDemora() {
         Random mockRandom = mock(Random.class);
@@ -78,6 +80,7 @@ public class BoteTest {
         }
     }
 
+    // Prueba el método ejecutarRescate del bote, verificando la salida y el tiempo de demora.
     @Test
     public void testEjecutarRescate() throws Exception {
         Random mockRandom = mock(Random.class);

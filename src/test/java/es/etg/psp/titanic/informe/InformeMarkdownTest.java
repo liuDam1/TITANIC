@@ -14,6 +14,7 @@ import es.etg.psp.titanic.model.Persona;
 
 public class InformeMarkdownTest {
 
+    // Prueba el método generarInforme del informe en formato Markdown, verificando la salida del archivo.
     @Test
     public void testGenerarInformeMarkdown() {
         List<Persona> datosPrueba = Arrays.asList(

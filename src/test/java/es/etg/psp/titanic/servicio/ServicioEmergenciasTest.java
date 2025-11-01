@@ -8,6 +8,7 @@ import es.etg.psp.titanic.model.Persona;
 
 public class ServicioEmergenciasTest {
 
+    // Prueba el método parsearSalida del servicio de emergencias, verificando la correcta conversión de la salida.
     @Test
     public void testParsearSalida() {
         ServicioEmergencias servicio = new ServicioEmergencias();
@@ -32,6 +33,7 @@ public class ServicioEmergenciasTest {
         }
     }
 
+    // Prueba el método generarIdentificadorBote del servicio de emergencias, verificando la salida del archivo.
     @Test
     public void testGenerarIdentificadorBote() {
         ServicioEmergencias servicio = new ServicioEmergencias();

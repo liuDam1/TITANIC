@@ -35,7 +35,7 @@ public class Bote {
             System.exit(CODIGO_ERROR);
         }
     }
-
+    // Ejecuta el rescate del bote, esperando un tiempo aleatorio y generando los datos de rescate.
     public void ejecutarRescate() throws InterruptedException {
         Thread.sleep(calcularTiempoDemora());
 
@@ -43,6 +43,7 @@ public class Bote {
         System.out.print(datosRescate);
     }
 
+    // Calcula el tiempo de demora aleatorio para el rescate del bote.
     private int calcularTiempoDemora() {
         int segundos = MIN_DEMORA + generador.nextInt(MAX_DEMORA - MIN_DEMORA + 1);
         return segundos * MILISEGUNDOS_POR_SEGUNDO;

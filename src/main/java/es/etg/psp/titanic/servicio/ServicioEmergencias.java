@@ -50,7 +50,7 @@ public class ServicioEmergencias {
     private String generarIdentificadorBote(int indice) {
         return String.format(FORMATO_ID_BOTE, indice);
     }
-
+    // Ejecuta el bote con el identificador dado, capturando la salida y manejando posibles errores.
     private void procesarBote(String id) {
         try {
             String[] comando = construirComandoBote(id);
@@ -68,7 +68,7 @@ public class ServicioEmergencias {
             manejarErrorProceso(id);
         }
     }
-
+    // Construye el comando para ejecutar el bote con el identificador dado.
     private String[] construirComandoBote(String id) {
         return new String[] {
                 COMANDO_JAVA,
@@ -91,7 +91,7 @@ public class ServicioEmergencias {
 
         return output.toString().trim();
     }
-
+    // Procesa la salida exitosa del bote, parseando la información y la agrega a la lista de resultados.
     private void procesarSalidaExitosa(String id, String salida) {
         Persona stats = parsearSalida(salida);
 
@@ -118,7 +118,7 @@ public class ServicioEmergencias {
 
     private void generarInformes() {
         System.out.println(MSG_GENERANDO_INFORMES);
-
+        //Ordena la lista resultados por el número que viene después de la primera letra en el identificador del bote.(Lambda)
         resultados.sort(Comparator.comparingInt(s -> Integer.parseInt(s.getIdentificadorBote().substring(1))));
 
         Informe consola = FactoriaInforme.crearInforme(TipoInforme.CONSOLA);

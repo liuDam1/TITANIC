@@ -25,8 +25,8 @@
     - [Conclusiones Individuales](#conclusiones-individuales)
 
 ## Integrantes del Proyecto
-- Integrante 1: 
-- Integrante 2: 
+- Integrante 1: Jiang yu Liu
+- Integrante 2: Andres Sanchez Valverde
 
 ## Manual de Usuario
 - Para ejecutar: **mvn exec:java**
@@ -57,6 +57,68 @@ El proyecto consiste en simular la gestión de los 20 botes salvavidas del RMS T
 Se ha adoptado un enfoque basado en procesos, donde cada bote salvavidas funciona como un proceso independiente que genera sus propios datos y luego se comunica con un proceso central (Servicio de Emergencias). Se utiliza el patrón de diseño Factory para la generación de informes, permitiendo una fácil extensión a diferentes formatos en el futuro.
 
 ### Diagramas de Clases
+<img src="./src/main/resources/DiagramaClase.png">
+
+> Me pedia que instarlar el jar de plantuml pero no la tengo, porlo tanto deje la imagen de la clase y el codigo porsiacaso.
+@startuml
+title Diagrama de clases - TITANIC
+class Main {
+  +static void main(String[] args)
+}
+class ServicioEmergencias {
+  -List<Persona> personas
+  -Bote bote
+  +ServicioEmergencias(Bote bote)
+  +registrarPersona(String nombre, int edad, String sexo) : Persona
+  +asignarABote(Persona persona) : void
+}
+class Bote {
+  -int capacidad
+  -List<Persona> ocupantes
+  +Bote(int capacidad)
+  +embarcar(Persona persona) : boolean
+  +desembarcar(Persona persona) : boolean
+  +getOcupantes() : List<Persona>
+}
+class Persona {
+  -String nombre
+  -int edad
+  -String sexo
+  +Persona(String nombre, int edad, String sexo)
+  +getNombre() : String
+  +getEdad() : int
+  +getSexo() : String
+  +esMayorEdad() : boolean
+}
+class FactoriaInforme {
+  +crearInforme(TipoInforme tipo) : Informe
+}
+interface Informe {
+  +generar(List<Persona> personas) : String
+}
+class InformeConsola {
+  +generar(List<Persona> personas) : String
+}
+class InformeMarkdown {
+  +generar(List<Persona> personas) : String
+}
+enum TipoInforme {
+  CONSOLA
+  HTML
+  MARKDOWN
+  XML
+}
+Main --> ServicioEmergencias : crea / usa
+Main --> FactoriaInforme : usa (para informes)
+ServicioEmergencias --> Bote : tiene
+ServicioEmergencias --> Persona : crea / gestiona
+Bote --> Persona : contiene
+FactoriaInforme --> Informe : devuelve implementación
+FactoriaInforme --> TipoInforme : usa (para formato)
+InformeConsola ..|> Informe
+InformeMarkdown ..|> Informe
+@enduml
+
 ```mermaid
 classDiagram
     %% Clases Principales
@@ -278,13 +340,7 @@ Donde:
 
 3. **Manejo de Errores en Procesos**: Se tuvieron que implementar mecanismos para manejar posibles fallos en los procesos secundarios, como tiempos de espera excesivos o salidas incorrectas.
 
-4. **Rendimiento**: Con 20 procesos ejecutándose simultáneamente, se experimentaron pequeños retrasos que requirieron optimización en la gestión de recursos.
-
-5. **Formato Preciso del Informe**: Generar exactamente el formato Markdown requerido, incluyendo la estructura de encabezados y listas, requirió un cuidadoso control de la salida.
-
-## Conclusiones Individuales
-
-
+4. **Formato Preciso del Informe**: Generar exactamente el formato Markdown requerido, incluyendo la estructura de encabezados y listas, requirió un cuidadoso control de la salida.
 ---
 
 *Este proyecto es una simulación académica basada en eventos históricos reales del hundimiento del RMS Titanic en 1912.*
