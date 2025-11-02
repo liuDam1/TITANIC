@@ -56,6 +56,47 @@ El proyecto consiste en simular la gestión de los 20 botes salvavidas del RMS T
 ### Paradigma de Desarrollo
 Se ha adoptado un enfoque basado en procesos, donde cada bote salvavidas funciona como un proceso independiente que genera sus propios datos y luego se comunica con un proceso central (Servicio de Emergencias). Se utiliza el patrón de diseño Factory para la generación de informes, permitiendo una fácil extensión a diferentes formatos en el futuro.
 
+### Diagrama de Componentes
+<img src="./src/main/resources/DiagramaComponentes.png">
+
+> title Diagrama de componentes - TITANIC-1
+package "es.etg.psp.titanic" {
+  component Main <<entrypoint>>
+}
+package "es.etg.psp.titanic.servicio" {
+  component ServicioEmergencias
+}
+package "es.etg.psp.titanic.barcos" {
+  component Bote
+}
+package "es.etg.psp.titanic.model" {
+  component Persona
+}
+package "es.etg.psp.titanic.informe" {
+  interface Informe
+  component FactoriaInforme
+  component InformeConsola
+  component InformeHTML
+  component InformeMarkdown
+  component InformeXML
+  component TipoInforme <<enum>>
+}
+package "resources" {
+  component "Informe.md" <<resource>>
+}
+' Relaciones sencillas y claras para estudiantes de primer año
+Main --> ServicioEmergencias : inicia / coordina
+Main --> FactoriaInforme : solicita informes
+ServicioEmergencias --> Persona : crea/usa (modelo de datos)
+ServicioEmergencias --> Bote : gestiona / asigna personas
+FactoriaInforme --> Informe : devuelve implementación
+FactoriaInforme --> InformeConsola
+FactoriaInforme --> InformeHTML
+FactoriaInforme --> InformeMarkdown
+FactoriaInforme --> InformeXML
+InformeMarkdown ..> "Informe.md" : lectura/recurso
+@enduml
+
 ### Diagramas de Clases
 <img src="./src/main/resources/DiagramaClase.png">
 
@@ -304,11 +345,11 @@ Donde:
 ## Plan de Pruebas
 
 ### Pruebas Unitarias
-- **Bote**: Verificar que genera números aleatorios dentro del rango correcto (1-100 personas)
-- **Bote**: Confirmar que el tiempo de espera está entre 2 y 6 segundos
-- **Bote**: Validar que la suma de mujeres, varones y niños coincide con el total
-- **ServicioEmergencias**: Probar que parsea correctamente la salida de los procesos
-- **InformeMarkdown**: Verificar que genera el formato correcto del informe
+- Verificar que genera números aleatorios dentro del rango correcto (1-100 personas)
+- Confirmar que el tiempo de espera está entre 2 y 6 segundos
+- Validar que la suma de mujeres, varones y niños coincide con el total
+- Probar que parsea correctamente la salida de los procesos
+- Verificar que genera el formato correcto del informe
 
 ### Pruebas de Integración
 - Probar la comunicación entre ServicioEmergencias y múltiples procesos Bote
@@ -342,5 +383,3 @@ Donde:
 
 4. **Formato Preciso del Informe**: Generar exactamente el formato Markdown requerido, incluyendo la estructura de encabezados y listas, requirió un cuidadoso control de la salida.
 ---
-
-*Este proyecto es una simulación académica basada en eventos históricos reales del hundimiento del RMS Titanic en 1912.*
