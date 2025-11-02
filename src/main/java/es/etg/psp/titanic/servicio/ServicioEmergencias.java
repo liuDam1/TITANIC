@@ -22,7 +22,7 @@ public class ServicioEmergencias {
     private static final String FORMATO_ID_BOTE = "B%02d";
     private static final String COMANDO_JAVA = "java";
     private static final String PARAMETRO_CLASSPATH = "-cp";
-    private static final String CLASE_BOTE = "es.etg.psp.titanic.barcos.Bote";
+    private static final String CLASE_BOTE = "es.etg.psp.titanic.barco.Bote";
     private static final String SEPARADOR_CSV = ";";
     private static final String SALTO_LINEA = "\n";
     private static final String ESPACIO_BOTE = " en bote ";

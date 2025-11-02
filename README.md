@@ -66,7 +66,7 @@ package "es.etg.psp.titanic" {
 package "es.etg.psp.titanic.servicio" {
   component ServicioEmergencias
 }
-package "es.etg.psp.titanic.barcos" {
+package "es.etg.psp.titanic.barco" {
   component Bote
 }
 package "es.etg.psp.titanic.model" {

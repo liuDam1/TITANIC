@@ -1,4 +1,4 @@
-package es.etg.psp.titanic.barcos;
+package es.etg.psp.titanic.barco;
 
 import java.util.Random;
 

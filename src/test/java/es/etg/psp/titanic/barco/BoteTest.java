@@ -1,4 +1,4 @@
-package es.etg.psp.titanic.barcos;
+package es.etg.psp.titanic.barco;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
